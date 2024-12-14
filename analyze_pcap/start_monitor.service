@@ -1,0 +1,9 @@
+[Unit]
+Description=Run inotifywait in background
+
+[Service]
+ExecStart=/bin/bash /opt/drop_files/scripts/monitor_pcap.sh
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
