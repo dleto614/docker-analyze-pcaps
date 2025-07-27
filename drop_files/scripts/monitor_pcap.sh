@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 WATCH_DIR="/opt/drop_files/pcaps"
-PROCESSED_DIR="/opt/drop_files/processed/"
+PROCESSED_DIR="/opt/drop_files/processed"
 
 MAX_JOBS=15
 count=0

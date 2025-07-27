@@ -21,19 +21,24 @@ mkdir -p $results_folder/p0f
 mkdir -p $results_folder/bruteshark
 mkdir -p $results_folder/ntlmraw_unhide
 
-cd $results_folder
+current=$(date)
+echo "[$current] Processing file "$FILE"" >> /opt/drop_files/scripts/logs/processed_pcaps.log
+
+if [[ -d "$json_folder/zeek/$results_uuid" && -w "$json_folder/zeek/$results_uuid" ]]
+then
+	cd $json_folder/zeek/$results_uuid
+  	/opt/zeek/bin/zeek -C \
+    	LogAscii::use_json=T \
+    	-r "$FILE"
+	cd $results_folder
+else
+  echo "Error: Cannot write to $json_folder/zeek/$results_uuid" > /opt/drop_files/scripts/logs/processed_pcaps.log
+fi
 
 dsniff -p "$FILE" -w $results_folder/dsniff/dsniff_results.log > /dev/null 2>&1 &
 p0f -r "$FILE" -o $results_folder/p0f/p0f.log > /dev/null  2>&1 &
 
-cd $json_folder/zeek/$results_uuid
-./opt/zeek/bin/zeek -C -r "$FILE" LogAscii::use_json=T > /dev/null 2>&1 &
-cd $results_folder
-
 python3 /opt/NTLMRawUnHide.py -q -i "$FILE" -o $results_folder/ntlmraw_unhide/ntlmraw_unhide.log > /dev/null 2>&1 &
-
-current=$(date)
-echo "[$current] Processing file "$FILE"" >> /opt/drop_files/scripts/logs/processed_pcaps.log
 
 # Wait for all the background processes to be done
 wait
@@ -66,7 +71,7 @@ else
 	rm -rf $results_folder/ntlmraw_unhide
 fi
 
-brutesharkcli -i "$FILE" -m Credentials,NetworkMap,DNS -o $results_folder/bruteshark > /dev/null &
+brutesharkcli -i "$FILE" -m Credentials,NetworkMap,DNS,FileExtracting -o $results_folder/bruteshark > /dev/null &
 
 /opt/drop_files/scripts/merge_json.sh "$results_uuid"
 
