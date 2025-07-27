@@ -8,7 +8,8 @@ count=0
 
 mkdir -p "$WATCH_DIR" "$PROCESSED_DIR"
 
-while true; do
+while true
+do
   echo "Processing pcaps"
 
   files=$(find "$WATCH_DIR" -type f -iname '*.pcap')
