@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt upgrade -y
 
-RUN apt update && apt install curl gpg p0f python3 python3-pip bruteshark dsniff tcpdump tshark git net-tools libpcap-dev nano iproute2 python3-venv inotify-tools tmux procps systemctl util-linux uuid-runtime jq -y
+RUN apt update && apt install foremost tcpflow curl gpg p0f python3 python3-pip bruteshark dsniff tcpdump tshark git net-tools libpcap-dev nano iproute2 python3-venv inotify-tools tmux procps systemctl util-linux uuid-runtime jq -y
 
 # Apparently zeek is broken due to libc6 dependency issue.
 # Best course of action is just installing directly from source.
