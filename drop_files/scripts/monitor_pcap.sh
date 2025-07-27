@@ -18,8 +18,9 @@ do
   then
     echo "No files to process. Cleaning up empty directories and files than Sleeping..."
 
-	find "$WATCH_DIR" -mindepth 1 -depth -type d -empty -delete
-	find "/opt/drop_files/results" -mindepth 1 -depth -type d -empty -delete
+    find "$WATCH_DIR" -mindepth 1 -depth -type d -empty -delete
+    find "/opt/drop_files/results" -mindepth 1 -depth -type d -empty ! -name "bruteshark" -delete
+
     sleep 10
     continue
   fi
