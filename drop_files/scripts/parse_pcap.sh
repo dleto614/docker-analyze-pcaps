@@ -32,7 +32,7 @@ then
     	-r "$FILE"
 	cd $results_folder
 else
-  echo "Error: Cannot write to $json_folder/zeek/$results_uuid" > /opt/drop_files/scripts/logs/processed_pcaps.log
+  echo "Error: Cannot write to $json_folder/zeek/$results_uuid" >> /opt/drop_files/scripts/logs/processed_pcaps.log
 fi
 
 dsniff -p "$FILE" -w $results_folder/dsniff/dsniff_results.log > /dev/null 2>&1 &
