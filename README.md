@@ -21,9 +21,9 @@ This is a hit or miss, but mostly due to a lot of tools just not good to handle 
 For some reason there are issues with zeek, but that isn't really a focus for me right now because the other tools work, and they work well.
 ------
 
-To monitor for new pcap files to try to process I created a lovely script called [monitor_pcap.sh](https://github.com/dleto614/docker-analyze-pcaps/blob/main/drop_files/scripts/monitor_pcap.sh) ~~which used the
+To monitor for new pcap files to try to process I created a lovely script called [monitor_pcap.sh](https://github.com/dleto614/docker-analyze-pcaps/blob/main/drop_files/scripts/monitor_pcap.sh) ~~which used the~~
 
-`inotifywait` linux program and it waits for files in the `/opt/drop_files/pcaps/`, but only looks for files that were "created" or "moved".~~
+~~`inotifywait` linux program and it waits for files in the `/opt/drop_files/pcaps/`, but only looks for files that were "created" or "moved".~~
 
 Now uses a while infinite loop and find to handle all the new files. Easier to deal with since there were some cases like subfolder n depth that I would not have full control over and couldn't get inotify to work nicely dynamically.
 
