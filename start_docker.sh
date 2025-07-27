@@ -8,6 +8,6 @@ mkdir -p drop_files/pcaps
 
 chmod +x drop_files/scripts/*
 
-docker run -t -d -v $(pwd)/drop_files:/opt/drop_files pcap_analysis
+sudo docker run -t -d -v $(pwd)/drop_files:/opt/drop_files pcap_analysis
 
 echo "[*] Done"
