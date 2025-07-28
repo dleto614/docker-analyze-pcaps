@@ -19,7 +19,10 @@ do
     echo "No files to process. Cleaning up empty directories and files than Sleeping..."
 
     find "$WATCH_DIR" -mindepth 1 -depth -type d -empty -delete
-    find "/opt/drop_files/results" -mindepth 1 -depth -type d -empty ! -name "/opt/drop_files/results/db/bruteshark*" -delete
+
+    # Clean up empty directories, but ignore tcpflow and foremost directories along with bruteshark.
+    # Tcpflow and foremost directories are cleaned up in extract_files.sh
+    find "/opt/drop_files/results" -mindepth 1 -depth -type d -empty ! -name "/opt/drop_files/results/db/bruteshark*" ! -name "/opt/drop_files/results/db/files/*" ! -name "/opt/drop_files/results/db/tcpflow/*" -delete
 
     sleep 10
     continue
